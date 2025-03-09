@@ -411,7 +411,7 @@ button.delete-btn:disabled {
  
 /* When the checkbox is checked */
 input:checked + .slider {
-    background-color: #49bd60;
+    background-color: #5fb971;
 }
  
 /* Move the handle when checked */
@@ -562,7 +562,7 @@ input:checked + .slider .switch-text {
  
  
 .header-box .switch input:checked + .slider {
-    background-color: #0bc817;
+    background-color: #26c431;
 }
  
 /*****************wrapper *****************************/
@@ -870,7 +870,7 @@ button:hover {
 }
  
 button.edit-btn:hover, button.delete-btn:hover {
-    background-color: #4390c3;
+    background-color:#007bff; /* Background color */
     box-shadow: 0 4px 10px rgba(5, 102, 229, 0.3);
     color: #edf0f4;
 }
