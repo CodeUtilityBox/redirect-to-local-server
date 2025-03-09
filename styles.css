@@ -115,7 +115,7 @@ input[type="text"], select {
     padding-left: 5px;
     margin-right: 10px; /* Space between select and button */
     margin-top: 3px; /* Adjust margin as needed */
-    border: 1px solid #4394eb; /* Blue border */
+    border: 1px solid #187df1; /* Blue border */
     border-radius: 5px; /* Rounded corners */
     height: 23px; /* Set height */
     background: white; /* Solid white background */
@@ -146,7 +146,7 @@ input[type="text"], select {
     width: 150px;
     border: none; /* Remove default border */
     border-radius: 5px; /* Rounded corners */
-    background: linear-gradient(135deg, #6395cb, #0077c9);
+    background: #007bff; /* Background color */
     color: white; /* Button text color */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background 0.3s ease, transform 0.3s ease; /* Smooth transition for background color and scale */
@@ -190,8 +190,8 @@ h4 {
     margin-top: 2px;
     align-items: center; /* Align items vertically in the center */
     box-sizing: border-box;
-    border: 2px solid rgba(10, 116, 187, 0.5); /* Light border with more opacity */
-    background-color:rgba(150, 196, 237, 0.2); ;
+    border: 2px solid #007bff; /* Background color */
+    /* background-color:#f1f2f4; Background color */
     transition: all 0.4s ease; /* Smooth transition for hover effects */
 }
  
@@ -297,7 +297,7 @@ hr {
     height: 25px;
     font-size: 12px ;
     padding: 5px 0; /* Vertical padding for the button */
-    background: linear-gradient(135deg, #6395cb, #0077c9);
+    background: #007bff; /* Background color */
     color: white; /* Button text color */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background 0.3s ease, transform 0.3s ease; /* Smooth transition for background color and scale */
@@ -311,7 +311,7 @@ hr {
     justify-content: center; /* Center items horizontallysasas */
  
     /* background-color: transparent; Transparent background */
-    border: 1px solid #0077c9; /* Blue border */
+    border: 1px solid #007bff; /* Background color */
     cursor: pointer; /* Pointer cursor on hover */
     
 }
@@ -319,7 +319,7 @@ hr {
  
 #disableAllBtn:hover {
     /* background-color: #b4260a; Darker green on hover */
-    background-color: #4390c3; /* Darker blue on hover */
+    background-color: #0157b2; /* Background color */
     transform: scale(1.05); /* Slightly enlarge on hover */
     color: #edf0f4; /* Blue text */
 }
@@ -327,7 +327,7 @@ hr {
 .redirects-list-container .underline {
     width: 100%; /* Full width of the container */
     height: 1.5px; /* Height of the underline */
-    background-color: #7ab2d8; /* Color of the underline */
+    background-color: #007bff; /* Background color */
     margin-top: 5px; /* Space between the button and underline */
 }
  
@@ -337,8 +337,8 @@ hr {
 button.edit-btn,
 button.delete-btn {
     background-color: transparent; /* Transparent background */
-    color: #0077c9; /* Blue text */
-    border: 1px solid #0077c9; /* Blue border */
+    color: #007bff; /* Background color */
+    border: 1px solid #007bff; /* Background color */
     border-radius: 4px; /* Slightly rounded corners */
     padding: 2px 10px; /* Padding for size consistency */
     cursor: pointer; /* Pointer cursor on hover */
@@ -352,7 +352,7 @@ button.delete-btn {
 /* Button hover effect */
 button.edit-btn:hover,
 button.delete-btn:hover {
-    background-color: #4390c3; /* Darker blue on hover */
+    background-color: #0b5fba; /* Background color */
     transform: scale(1.05); /* Slightly enlarge on hover */
     color: #edf0f4; /* Blue text */
 }
@@ -450,7 +450,7 @@ input:checked + .slider .switch-text {
 }
  
 .edit-btn, .delete-btn {
-    margin-left: 10px; /* Space between buttons */
+    /* margin-left: 10px; Space between buttons */
 }
  
 .switch {
@@ -507,7 +507,7 @@ input:checked + .slider .switch-text {
 }
   
   .header-box {
-    background: linear-gradient(135deg, #1d65b1, #0077c9); /* Gradient from #1d65b1 to a slightly lighter blue */
+    background: #007bff; /* Background color */
     color: #ffffff; /* White text for contrast */
     padding: 0 30; /* Remove top/bottom padding and keep side padding */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Softer shadow for depth */
@@ -856,26 +856,22 @@ button {
 }
  
 button:hover {
-    transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
  
 #addRedirect:hover {
-    background: linear-gradient(135deg, #0077c9, #6395cb);
-    transform: translateY(2px);
+    background: #0360c4; /* Background color */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
  
 #disableAllBtn:hover {
-    background: linear-gradient(135deg, #0077c9, #6395cb);
-    transform: translateY(-2px);
+    background: #0255ae; /* Background color */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
  
 button.edit-btn:hover, button.delete-btn:hover {
     background-color: #4390c3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(5, 102, 229, 0.3);
     color: #edf0f4;
 }
  
@@ -891,7 +887,6 @@ button.edit-btn:hover, button.delete-btn:hover {
 }
  
 .redirect-item:hover {
-    transform: translateY(-1px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
  
