@@ -190,7 +190,7 @@ h4 {
     margin-top: 2px;
     align-items: center; /* Align items vertically in the center */
     box-sizing: border-box;
-    border: 2px solid #007bff; /* Background color */
+    border: 1.5px solid #007bff; /* Background color */
     /* background-color:#f1f2f4; Background color */
     transition: all 0.4s ease; /* Smooth transition for hover effects */
 }
@@ -411,7 +411,7 @@ button.delete-btn:disabled {
  
 /* When the checkbox is checked */
 input:checked + .slider {
-    background-color: #358dc8;
+    background-color: #49bd60;
 }
  
 /* Move the handle when checked */
@@ -525,7 +525,7 @@ input:checked + .slider .switch-text {
     left: 0;
     right: 0;
     height: 40px; /* Height of the glossy effect */
-    background: rgba(255, 255, 255, 0.3); /* White gloss with transparency */
+    /* background: rgba(255, 255, 255, 0.3); White gloss with transparency */
     border-top-left-radius: 2px; /* Matching radius with the header */
     border-top-right-radius: 1200px; /* Matching radius with the header */
     transform: rotate(5deg); /* Slight angle for a glossy look */
