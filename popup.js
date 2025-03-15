@@ -15,7 +15,12 @@ const searchInput = document.getElementById('searchInput');
 // Step 1: Extract extensionId from the URL
 const urlParams = new URLSearchParams(window.location.search);
 const extensionId = urlParams.get('extension_id'); // Get the extensionId from the URL parameter
-!extensionId && alert("Extension ID not found in the URL, close and reopen the extension !!");
+!extensionId && alert("Extension ID is missing from the URL. Please close and reopen the extension to resolve this issue.");
+const htmlString = `
+    <p>Tip: Refresh your webApp to sync with the extension after adding a new domain or after long breaks 🔄</p>
+`;
+createPopup(htmlString, 15000);
+
 
 
 // Redirects Data
@@ -35,11 +40,23 @@ formButton.addEventListener('click', () => {
   redirectWrapper.classList.toggle('visible');
   // Update the button text based on visibility
   formButton.textContent = redirectWrapper.classList.contains('visible') ? '−' : '+';
-  if (formButton.textContent == '+') {
+  // if (formButton.textContent !== '+') {
+  //   // If the wrapper is visible, calculate and set the height of #redirectList
+  //   const wrapperHeight = redirectWrapper.clientHeight; // Get the height of the wrapper
+  //   const parentHeight = redirectWrapper.parentElement.clientHeight; // Get the height of the parent container
+  //   const remainingHeight = parentHeight + wrapperHeight +10; // Calculate remaining height
+
+  //   redirectList.style.height = `${remainingHeight}px`; // Set the height of #redirectList
+  // } else {
+  //   // If the wrapper is hidden, reset the height of #redirectList to 100%
+  //   redirectList.style.height = '100%';
+  // }
+  if (formButton.textContent !== '-') {
     fromUrlInput.value = '';
     toUrlInput.value = '';
     methodSelect.value = 'GET';
     updatingRuleId = null;
+    addRedirectButton.textContent = 'ADD REDIRECT';
   }
 });
 
@@ -47,17 +64,19 @@ function updateMainToggle(status) {
   const mainToggle = document.getElementById('main-toggle');
   const switchText = mainToggle.parentElement.querySelector('.switch-text');
   mainToggle.checked = status == 'ON' ? true : false;
-  //mainToggle.checked && showToast('Extension is in Listening mode !', 3000, 'success');
+  // mainToggle.checked && showToast('The extension is now in listening mode !', 3000, 'succinfoess');
   switchText.textContent = status || 'OFF';
 }
 
 // Render Redirect List
-function renderRedirectList(redirects) {
+async function renderRedirectList(redirects) {
   const redirectList = document.getElementById('redirectList');
   redirectList.innerHTML = ''; // Clear existing list
   redirects.forEach((redirect) => {
     const method = redirect.method || 'GET'; // Default to GET if method is undefined
     const methodClass = `method-${method.toLowerCase()}`; // Generate class for method badge
+    const enableBtnColorBk = redirect.enabled ?  '#007bff' :'transparent';
+    const enableBtnColor = redirect.enabled ?  '#edf0f4' :'007bff';
 
     // Create list item
     const li = document.createElement('li');
@@ -73,13 +92,7 @@ function renderRedirectList(redirects) {
               </div>
               <div class="action-container">
               <span class="method-badge ${methodClass}">${method}</span>
-                  <label class="switch">
-                      <input type="checkbox" class="enable-toggle" ${redirect.enabled ? 'checked' : ''} data-rule-id="${redirect.redirectRuleId}">
-                      <span class="slider round">
-                          <span class="switch-text">${redirect.enabled ? 'ON' : 'OFF'}</span>
-                      </span>
-                  </label>
-
+              <button class="enable-btn" data-rule-id="${redirect.redirectRuleId}" data-enabled="${redirect.enabled}" style="background-color: ${enableBtnColorBk}; color: ${enableBtnColor};">${redirect.enabled ? 'Enable' :  'Disable' }</button>
                   <button class="edit-btn" data-rule-id="${redirect.redirectRuleId}">Edit</button>
                   <button class="delete-btn" data-rule-id="${redirect.redirectRuleId}">Delete</button>
               </div>
@@ -91,14 +104,15 @@ function renderRedirectList(redirects) {
     redirectList.appendChild(li);
 
     // Add event listeners for toggle, edit, and delete buttons
-    const checkbox = li.querySelector('.enable-toggle');
-    const switchText = li.querySelector('.switch-text');
+    const checkbox = li.querySelector('.enable-btn');
 
-    checkbox.addEventListener('change', (event) => {
+    checkbox.addEventListener('click', (event) => {
       const ruleId = event.target.getAttribute('data-rule-id');
-      const isEnabled = event.target.checked;
-      switchText.textContent = isEnabled ? 'ON' : 'OFF';
-      handleEnableToggle(ruleId, isEnabled); // Pass ruleId and isEnabled to the handler
+      const isEnabled = event.target.getAttribute('data-enabled') === 'true';
+      const newState = !isEnabled;
+      event.target.textContent = newState ? 'Disable' : 'Enable';
+      event.target.setAttribute('data-enabled', newState);
+      handleEnableToggle(ruleId, newState);
     });
 
     const editButton = li.querySelector('.edit-btn');
@@ -125,8 +139,9 @@ function editRedirect(ruleId) {
   const redirect = localRedirects.find((r) => r.redirectRuleId == ruleId);
 
   if (!redirect) {
-    alert("Ridirect rule not found in cache, refresh the page !!");
-    //return;
+    //alert("The redirect rule could not be found in the cache. Please refresh the page and try again.");
+    showToast('The redirect rule could not be found in the cache. Please refresh the page and try again.', 6000, 'error');
+    return;
   }
   // Step 2: Populate the form fields with the redirect data
   fromUrlInput.value = redirect.from;
@@ -146,32 +161,32 @@ function editRedirect(ruleId) {
 function deleteRedirect(ruleId) {
   chrome.runtime.sendMessage(extensionId, { action: 'DeleteRedirect', ruleId }, (res) => {
     refreshPage();
-    showToast('Deleted the API successfully!', 3000, 'success');
+    showToast('The redirect rule has been successfully deleted.', 3000, 'success');
   });
 }
 
 // Toggle Redirect Enable/Disable
 function handleEnableToggle(ruleId, status) {
   chrome.runtime.sendMessage(extensionId, { action: 'EnableDisableRedirect', ruleId, status }, (res) => {
-    refreshPage();
+    refreshPage('search');
   });
 }
 
 
 // Load Saved Redirects and Extension State
 async function refreshPage(source) {
-
-  !extensionId && alert("Extension ID not found in the URL, close and reopen the extension !!");
+  !extensionId && alert("Extension ID is missing from the URL. Please close and reopen the extension to resolve this issue.");
 
   // Step 2: Send a message to the extension to get all data
-  chrome.runtime.sendMessage(extensionId, { action: 'GetAllData', search }, (response) => {
+  chrome.runtime.sendMessage(extensionId, { action: 'GetAllData', search }, async (response) => {
     if (chrome.runtime.lastError) {
       console.error('Error communicating with extension:', chrome.runtime.lastError.message);
       return;
     }
     // Step 3: Render the redirect list with the received data
     const redirects = response?.redirects || [];
-    renderRedirectList(redirects);
+    await renderRedirectList(redirects);
+    setEqualWidth()
     updateMainToggle(response?.onOff?.[0]);
     //reset local values
     if (source != 'search') {
@@ -184,9 +199,9 @@ async function refreshPage(source) {
 
 //ReSyncRedirects actions
 reSyncRedirects.addEventListener('click', () => {
-  chrome.runtime.sendMessage(extensionId, { action: 'ReSyncRedirects' }, (res) => {
-    refreshPage();
-    showToast('Re-Synced all APIs successfully!', 3000, 'success');
+  chrome.runtime.sendMessage(extensionId, { action: 'ReSyncRedirects' }, async (res) => {
+    await refreshPage('search');
+    showToast('All redirect rules have been successfully re-synced.', 3000, 'success');
   });
 });
 
@@ -206,8 +221,8 @@ addRedirectButton.addEventListener('click', async () => {
     fromUrlInput.value = '';
     toUrlInput.value = '';
     methodSelect.value = 'GET';
-    ruleId ? showToast('Redirect updated successfully!', 3000, 'success') : showToast('Redirect added successfully!', 3000, 'success');
-    if (search) showToast('FYI - Search filter is applied', 3000, 'info');
+    ruleId ? showToast('The redirect rule has been successfully updated.', 3000, 'success') : showToast('The redirect rule has been successfully added.', 3000, 'success');
+    if (search) showToast('Note: A search filter is currently applied. Results are being filtered accordingly.', 3000, 'info');
     refreshPage();
   });
 
@@ -218,7 +233,7 @@ document.getElementById('main-toggle').addEventListener('change', (event) => {
   const isChecked = event.target.checked;
   const status = isChecked ? 'ON' : 'OFF';
   chrome.runtime.sendMessage(extensionId, { action: 'EnableDisableExtension', status }, (res) => {
-    refreshPage();
+    refreshPage('search');
   });
 });
 
@@ -268,11 +283,11 @@ async function validations() {
     return false;
   }
   if (!hasSameNumberOfHashes(fromUrl, toUrl)) {
-    showToast('Placeholder # must be same in both URLs', 3000, 'error')
+    showToast('The number of placeholder # must be same in both URLs', 3000, 'error')
     return false;
   }
   if (!updatingRuleId && localRedirects.find(e => e.from === fromUrl && e.method == method)) {
-    showToast('Redirect already exists', 3000, 'error')
+    showToast('A redirect rule with the same \'From\' URL and method already exists.', 3000, 'error')
     return false;
   }
 
@@ -303,36 +318,65 @@ function isValidUrl(url) {
   }
 }
 
-function askToInstallExtn() {
-  // Step 1: Extract extensionId from the URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const extensionId = urlParams.get('extnId'); // Get the extensionId from the URL parameter
+function createPopup(htmlString, time) {
+  // Check if a popup already exists and remove it
+  const existingPopup = document.getElementById('customPopup');
+  if (existingPopup) {
+      document.body.removeChild(existingPopup);
+  }
 
-  if (!extensionId) {
-    // Create the popup
-    const popupContainer = document.createElement('div');
-    popupContainer.id = 'extensionPopupContainer';
+  // Create the popup container
+  const popupContainer = document.createElement('div');
+  popupContainer.id = 'customPopup';
+  popupContainer.innerHTML = `
+      <div class="popup-content">
+          <span class="close-btn">&times;</span>
+          <div class="popup-html-content">${htmlString}</div>
+      </div>
+  `;
 
-    // Popup content
-    popupContainer.innerHTML = `
-        <h3>Extension Required</h3>
-        <p>Extension not installed. Please install it first.</p>
-        <a href="https://chromewebstore.google.com/detail/redirect-to-local-server/mcckhgbpcjcfdmnmbahhoakjlnmmjjgo" target="_blank" class="download-extension-link">Install Extension</a>
-    `;
+  // Append the popup to the body
+  document.body.appendChild(popupContainer);
 
-    // Create overlay
-    const overlay = document.createElement('div');
-    overlay.id = 'extensionOverlay';
+  // Display the popup
+  popupContainer.style.display = 'block';
 
-    // Append popup and overlay to the body
-    document.body.appendChild(overlay);
-    document.body.appendChild(popupContainer);
+  // Close the popup when the close button is clicked
+  const closeBtn = popupContainer.querySelector('.close-btn');
+  closeBtn.addEventListener('click', closePopup);
 
-    // Display the popup and overlay
-    popupContainer.style.display = 'block';
-    overlay.style.display = 'block';
+  // Automatically close the popup after the specified time
+  if (time) {
+      setTimeout(closePopup, time);
   }
 }
+
+function closePopup() {
+  const popupContainer = document.getElementById('customPopup');
+  if (popupContainer && popupContainer.parentNode) {
+      popupContainer.parentNode.removeChild(popupContainer);
+  }
+}
+
+// Function to set equal width for all .redirect-item elements
+function setEqualWidth() {
+  // Get all .redirect-item elements
+  const items = document.querySelectorAll('.redirect-item');
+  let maxWidth = 0;
+  // Find the maximum width among all items
+  items.forEach(item => {
+      const itemWidth = item.offsetWidth; // Get the actual width of the item
+      if (itemWidth > maxWidth) {
+          maxWidth = itemWidth;
+      }
+  });
+
+  // Set the maximum width to all items
+  items.forEach(item => {
+      item.style.width = `${maxWidth}px`;
+  });
+}
+
 
 
 // Initialize
