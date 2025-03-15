@@ -90,7 +90,7 @@ input[type="text"], select {
     border: 1px solid #4394eb; /* Blue border */
     border-radius: 4px;
     margin-bottom: 4px; /* Reduced space below input fields */
-    font-size: 12px; /* Smaller font size for input fields */
+    font-size: 14px; /* Smaller font size for input fields */
 }
  
  
@@ -251,8 +251,12 @@ li {
 hr {
     border: 0.5px solid #ccc; /* Style for the separator line */
     margin: 5px 0; /* Margin above and below the line */
-    margin-left: -10px;
-    width: 105%;
+    width: calc(102% + 35px); /* Combine 102% and 10px */
+    position: relative; /* Enable positioning */
+    z-index: 1; /* Ensure the <hr> appears on top of other elements */
+    margin-left: -10px ;
+    margin-right: -10px;
+
 }
  
 .redirects-list-container {
@@ -273,6 +277,7 @@ hr {
     scrollbar-width: thin; /* Firefox */
     flex-grow: 1;
     white-space: nowrap; /* Prevent text wrapping */
+    
 }
  
  
@@ -335,6 +340,7 @@ hr {
  
 /* Container for the buttons and toggle */
 button.edit-btn,
+button.enable-btn,
 button.delete-btn {
     background-color: transparent; /* Transparent background */
     color: #007bff; /* Background color */
@@ -352,10 +358,20 @@ button.delete-btn {
 /* Button hover effect */
 button.edit-btn:hover,
 button.delete-btn:hover {
-    background-color: #0b5fba; /* Background color */
+    background-color: #267dda; /* Background color */
     transform: scale(1.05); /* Slightly enlarge on hover */
     color: #edf0f4; /* Blue text */
 }
+
+.enable-btn.enabled {
+    background-color: #007bff;
+    color: #edf0f4;
+  }
+  
+  .enable-btn.disabled {
+    background-color: #ccc;
+    color: #000;
+  }
  
 button.delete-btn:disabled {
     background-color: grey; /* Grey background when disabled */
@@ -881,13 +897,10 @@ button.edit-btn:hover, button.delete-btn:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
 }
  
-/* 4. Hover Effects for List Cards */
 .redirect-item {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
- 
-.redirect-item:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: fit-content; /* Ensures the width is based on the content */
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
 }
  
  
@@ -931,7 +944,7 @@ button.edit-btn:hover, button.delete-btn:hover {
 }
 
 .method-post {
-    background-color: #2196F3; /* Blue for POST */
+    background-color: #310ce8; /* Blue for POST */
 }
 
 .method-put {
@@ -951,3 +964,56 @@ button.edit-btn:hover, button.delete-btn:hover {
     align-items: center;
     gap: 10px; /* Adjust the gap between the toggle switch and buttons */
 }
+
+#customPopup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4caf50;
+    padding: 0px 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+    width: 400px; /* Default width */
+    max-width: 90%; /* Responsive max-width */
+    text-align: center;
+    transition: opacity 0.5s ease-out, bottom 0.5s ease-out;
+    
+}
+
+.popup-content {
+    position: relative; /* Required for absolute positioning of the close button */
+}
+
+.popup-html-content {
+    text-align: left; /* Align HTML content to the left */
+    font-size: 16px;
+    line-height: 1.5;
+    color: white;
+}
+
+.close-btn {
+    position: absolute;
+    top: -17px; /* Half of the button's height to move it outside the popup */
+    right: -11px; /* Half of the button's width to move it outside the popup */
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff; /* White text for better contrast */
+    /* background-color: #e4d9d6; */ /* Background color */
+    border-radius: 50%;
+    width: 21px; /* Button width */
+    height: 21px; /* Button height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+}
+
+
+.close-btn:hover {
+    background-color: #e03a0e; /* Darker shade on hover */
+}
+
