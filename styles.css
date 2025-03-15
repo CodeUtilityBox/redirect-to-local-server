@@ -252,7 +252,7 @@ hr {
     border: 0.5px solid #ccc; /* Style for the separator line */
     margin: 5px 0; /* Margin above and below the line */
     width: calc(102% + 35px); /* Combine 102% and 10px */
-    min-width: 105%; /* Ensure a minimum width of 105% */
+    min-width: 145%; /* Ensure a minimum width of 105% */
     position: relative; /* Enable positioning */
     z-index: 1; /* Ensure the <hr> appears on top of other elements */
     margin-left: -10px ;
