@@ -15,11 +15,13 @@ const searchInput = document.getElementById('searchInput');
 // Step 1: Extract extensionId from the URL
 const urlParams = new URLSearchParams(window.location.search);
 const extensionId = urlParams.get('extension_id'); // Get the extensionId from the URL parameter
-!extensionId && alert("Extension ID is missing from the URL. Please close and reopen the extension to resolve this issue.");
-const htmlString = `
-    <p>Tip: Refresh your webApp to sync with the extension after adding a new domain or after long breaks 🔄</p>
-`;
-createPopup(htmlString, 15000);
+const downloadLink = "https://chromewebstore.google.com/detail/redirect-to-local-server/mcckhgbpcjcfdmnmbahhoakjlnmmjjgo"; // 
+const extensionMessage = `Extension ID is missing from the URL. Please close and reopen the extension to resolve this issue.\n\nIf you have not downloaded the extension yet, you can download it from the link below:\n${downloadLink}`;
+const TipHtmlString = `<p>Tip: Refresh your webApp to sync with the extension after adding a new domain or after long breaks 🔄</p>`;
+
+!extensionId && alert(extensionMessage);
+
+createPopup(TipHtmlString, 15000);
 
 
 
@@ -175,7 +177,7 @@ function handleEnableToggle(ruleId, status) {
 
 // Load Saved Redirects and Extension State
 async function refreshPage(source) {
-  !extensionId && alert("Extension ID is missing from the URL. Please close and reopen the extension to resolve this issue.");
+  !extensionId && alert(extensionMessage);
 
   // Step 2: Send a message to the extension to get all data
   chrome.runtime.sendMessage(extensionId, { action: 'GetAllData', search }, async (response) => {
