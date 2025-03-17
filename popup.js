@@ -17,7 +17,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const extensionId = urlParams.get('extension_id'); // Get the extensionId from the URL parameter
 const downloadLink = "https://chromewebstore.google.com/detail/redirect-to-local-server/mcckhgbpcjcfdmnmbahhoakjlnmmjjgo"; // 
 const extensionMessage = `Extension ID is missing from the URL. Please close and reopen the extension to resolve this issue.\n\nIf you have not downloaded the extension yet, download "Redirect to Local server" Chrome Extension.`;
-const TipHtmlString = `<p>🚀 After adding a new <strong>DOMAIN</strong> or after a <strong>LONG BREAK</strong>, turn <strong>OFF</strong> the extension & <strong>REFRESH</strong> your web app to sync with the extension. 🔄</p>`;
+const TipHtmlString = `<p>🔄 After adding a new <strong>DOMAIN</strong> or after a <strong>LONG BREAK</strong>, turn <strong>OFF</strong> the extension & <strong>REFRESH</strong> your web app to sync with the extension.</p>`;
 
 !extensionId && alert(extensionMessage);
 
