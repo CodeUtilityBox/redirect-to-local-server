@@ -945,7 +945,7 @@ button.edit-btn:hover, button.delete-btn:hover {
 }
 
 .method-post {
-    background-color: #310ce8; /* Blue for POST */
+    background-color: #d9561e; /* Blue for POST */
 }
 
 .method-put {
@@ -953,11 +953,11 @@ button.edit-btn:hover, button.delete-btn:hover {
 }
 
 .method-patch {
-    background-color: #9C27B0; /* Purple for PATCH */
+    background-color: #953da5; /* Purple for PATCH */
 }
 
 .method-delete {
-    background-color: #F44336; /* Red for DELETE */
+    background-color: #e1473c; /* Red for DELETE */
 }
 
 .action-container {
@@ -1017,4 +1017,3 @@ button.edit-btn:hover, button.delete-btn:hover {
 .close-btn:hover {
     background-color: #e03a0e; /* Darker shade on hover */
 }
-
