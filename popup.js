@@ -77,7 +77,8 @@ async function renderRedirectList(redirects) {
   redirects.forEach((redirect) => {
     const method = redirect.method || 'GET'; // Default to GET if method is undefined
     const methodClass = `method-${method.toLowerCase()}`; // Generate class for method badge
-    const enableBtnColorBk = redirect.enabled ?  '#007bff' :'transparent';
+    const enableBtnColorBk = redirect.enabled ?  'background: linear-gradient(50deg, #2196F3, #134a88);' : 'background: transparent;';
+
     const enableBtnColor = redirect.enabled ?  '#edf0f4' :'007bff';
 
     // Create list item
@@ -94,7 +95,7 @@ async function renderRedirectList(redirects) {
               </div>
               <div class="action-container">
               <span class="method-badge ${methodClass}">${method}</span>
-              <button class="enable-btn" data-rule-id="${redirect.redirectRuleId}" data-enabled="${redirect.enabled}" style="background-color: ${enableBtnColorBk}; color: ${enableBtnColor};">${redirect.enabled ? 'Enable' :  'Disable' }</button>
+              <button class="enable-btn" data-rule-id="${redirect.redirectRuleId}" data-enabled="${redirect.enabled}" style="${enableBtnColorBk}; color: ${enableBtnColor};">${redirect.enabled ? 'Enable' :  'Disable' }</button>
                   <button class="edit-btn" data-rule-id="${redirect.redirectRuleId}">Edit</button>
                   <button class="delete-btn" data-rule-id="${redirect.redirectRuleId}">Delete</button>
               </div>
