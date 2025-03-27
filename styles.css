@@ -87,7 +87,7 @@ h3 {
 input[type="text"], select {
     width: calc(100% - 10px); /* Width adjusted for compactness */
     padding: 3px; /* Reduced padding */
-    border: 1px solid #4394eb; /* Blue border */
+    border: 1px solid #5a9be0; /* Blue border */
     border-radius: 4px;
     margin-bottom: 4px; /* Reduced space below input fields */
     font-size: 14px; /* Smaller font size for input fields */
@@ -142,11 +142,11 @@ input[type="text"], select {
 /** effect for add button */
 #addRedirect {
     padding: 0 10px; /* Adjusted padding for better alignment */
-    height: 22px; /* Set height */
+    height: 24px; /* Set height */
     width: 150px;
     border: none; /* Remove default border */
     border-radius: 5px; /* Rounded corners */
-    background: #007bff; /* Background color */
+    background: linear-gradient(135deg, #2196F3, #10519b);
     color: white; /* Button text color */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background 0.3s ease, transform 0.3s ease; /* Smooth transition for background color and scale */
@@ -155,7 +155,7 @@ input[type="text"], select {
     margin-bottom: 0px;
 }
 button:hover {
-    background-color: #1d65b1;
+    background: linear-gradient(135deg, #2196F3, #10519b);
     transform: scale(1.05); /* Slightly enlarge on hover */
 }
  
@@ -190,8 +190,8 @@ h4 {
     margin-top: 2px;
     align-items: center; /* Align items vertically in the center */
     box-sizing: border-box;
-    border: 1.5px solid #007bff; /* Background color */
-    /* background-color:#f1f2f4; Background color */
+    border: 1.5px solid #518ccb; /* Background color */
+    /* background-color:#f1f2f4;  background: linear-gradient(135deg, #2196F3, #10519b); Background color */
     transition: all 0.4s ease; /* Smooth transition for hover effects */
 }
  
@@ -303,10 +303,10 @@ hr {
     height: 25px;
     font-size: 12px ;
     padding: 5px 0; /* Vertical padding for the button */
-    background: #007bff; /* Background color */
+    background: linear-gradient(135deg, #2196F3, #10519b);
     color: white; /* Button text color */
     cursor: pointer; /* Pointer cursor on hover */
-    transition: background 0.3s ease, transform 0.3s ease; /* Smooth transition for background color and scale */
+    /* transition: background 0.3s ease, transform 0.3s ease; Smooth transition for background color and scale */
     cursor: pointer; /* Pointer cursor on hover */
     margin-top: 5px;
     margin-right: 33px;
@@ -325,15 +325,15 @@ hr {
  
 #disableAllBtn:hover {
     /* background-color: #b4260a; Darker green on hover */
-    background-color: #0157b2; /* Background color */
-    transform: scale(1.05); /* Slightly enlarge on hover */
-    color: #edf0f4; /* Blue text */
+    background: linear-gradient(135deg, #2196F3, #10519b);
+    /* transform: scale(1.05); Slightly enlarge on hover */
+    /* color: #edf0f4; Blue text */
 }
  
 .redirects-list-container .underline {
     width: 100%; /* Full width of the container */
     height: 1.5px; /* Height of the underline */
-    background-color: #007bff; /* Background color */
+    background: linear-gradient(135deg, #2196F3, #10519b);
     margin-top: 5px; /* Space between the button and underline */
 }
  
@@ -344,8 +344,8 @@ button.edit-btn,
 button.enable-btn,
 button.delete-btn {
     background-color: transparent; /* Transparent background */
-    color: #007bff; /* Background color */
-    border: 1px solid #007bff; /* Background color */
+    color: #4b87c6; /* Background color */
+    border: 1px solid #4388d2; /* Background color */
     border-radius: 4px; /* Slightly rounded corners */
     padding: 2px 10px; /* Padding for size consistency */
     cursor: pointer; /* Pointer cursor on hover */
@@ -359,15 +359,15 @@ button.delete-btn {
 /* Button hover effect */
 button.edit-btn:hover,
 button.delete-btn:hover {
-    background-color: #267dda; /* Background color */
+    background: linear-gradient(50deg, #2196F3, #134a88);
     transform: scale(1.05); /* Slightly enlarge on hover */
     color: #edf0f4; /* Blue text */
 }
 
-.enable-btn.enabled {
-    background-color: #007bff;
+/* .enable-btn.enabled {
+    background: linear-gradient(50deg, #2196F3, #134a88);
     color: #edf0f4;
-  }
+  } */
   
   .enable-btn.disabled {
     background-color: #ccc;
@@ -513,7 +513,8 @@ input:checked + .slider .switch-text {
 .header-box {
     width: 100%; /* Full width */
     height: 50px; /* Fixed height */
-    background-color: #007bff; /* Background color */
+    /* background-color: #007bff; Background color */
+    background: linear-gradient(135deg, #3595e2, #02152a);
     color: white; /* Text color */
     display: flex; /* Use flexbox */
     align-items: center; /* Vertically center */
@@ -524,7 +525,7 @@ input:checked + .slider .switch-text {
 }
   
   .header-box {
-    background: #007bff; /* Background color */
+    background: linear-gradient(135deg, #2196F3, #10519b);
     color: #ffffff; /* White text for contrast */
     padding: 0 30; /* Remove top/bottom padding and keep side padding */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Softer shadow for depth */
@@ -595,7 +596,7 @@ input:checked + .slider .switch-text {
     font-size: 18px;
     cursor: pointer;
     border: 0px solid rgb(89, 110, 146);
-    background-color: #f6c604; /* Set background color */
+    background: linear-gradient(50deg, #dee908, #eb960e);
     color: rgb(17, 52, 112); /* Set text color to black */                 /* Text color */
     border-radius: 50%;              /* Make it circular */
     width: 25px;                     /* Circular dimensions */
@@ -801,21 +802,24 @@ input:checked + .slider .switch-text {
     text-align: center; /* Center-align text */
 }
 
-/* Toast Colors */
+/* Success - Green shades for success messages */
 .toast.success {
-    background-color: #4CAF50;
+    background: linear-gradient(45deg, #4CAF50, #1B5E20); /* Light to deep green */
 }
 
+/* Error - Red shades for errors */
 .toast.error {
-    background-color: #F44336;
+    background: linear-gradient(45deg, #F44336, #B71C1C); /* Bright to deep red */
 }
 
+/* Warning - Orange shades for warnings */
 .toast.warning {
-    background-color: #FF9800;
+    background: linear-gradient(45deg, #FF9800, #E65100); /* Vibrant to deep orange */
 }
 
+/* Info - Teal instead of Blue for a fresh look */
 .toast.info {
-    background-color: #2196F3;
+    background: linear-gradient(45deg, #009688, #00695C); /* Light to deep teal */
 }
 
 /* Animations */
@@ -877,12 +881,12 @@ button:hover {
 }
  
 #addRedirect:hover {
-    background: #0360c4; /* Background color */
+    background: linear-gradient(135deg, #2196F3, #10519b);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
  
 #disableAllBtn:hover {
-    background: #0255ae; /* Background color */
+    background: linear-gradient(135deg, #2196F3, #10519b);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
  
@@ -894,7 +898,7 @@ button.edit-btn:hover, button.delete-btn:hover {
  
 #toggleButton:hover {
     background-color: #f6c604;
-    transform: scale(1.1);
+    transform: scale(1.9);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
 }
  
@@ -939,26 +943,31 @@ button.edit-btn:hover, button.delete-btn:hover {
     line-height: 16px; /* Center text vertically */
 }
 
-/* Method-specific colors */
+/* GET - Green shades for retrieval operations */
 .method-get {
-    background-color: #4CAF50; /* Green for GET */
+    background: linear-gradient(45deg, #6ace6d, #338838); /* Light to deep green */
 }
 
+/* POST - Orange shades for data creation */
 .method-post {
-    background-color: #7e9107; /* Blue for POST */
+    background: linear-gradient(45deg, #FF9800, #E65100); /* Bright to deep orange */
 }
 
+/* PUT - Yellow-Gold for updates */
 .method-put {
-    background-color: #FF9800; /* Orange for PUT */
+    background: linear-gradient(45deg, #FFD700, #FFA000); /* Gold to amber */
 }
 
+/* PATCH - Purple shades for partial updates */
 .method-patch {
-    background-color: #953da5; /* Purple for PATCH */
+    background: linear-gradient(45deg, #8e6296, #b353ef); /* Vibrant to dark purple */
 }
 
+/* DELETE - Red shades for destructive operations */
 .method-delete {
-    background-color: #e1473c; /* Red for DELETE */
+    background: linear-gradient(45deg, #e08482, #c30707); /* Bright to deep red */
 }
+
 
 .action-container {
     display: flex;
@@ -972,7 +981,7 @@ button.edit-btn:hover, button.delete-btn:hover {
     top: 85%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #4caf50;
+    background: linear-gradient(50deg, #38c244, #0a8e08);
     padding: 0px 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
